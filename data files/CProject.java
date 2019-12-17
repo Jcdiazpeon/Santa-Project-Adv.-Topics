@@ -14,7 +14,7 @@ public class CProject
 		List<String> toys = new ArrayList<String>();
 		List<String> start = new ArrayList<String>();
 		List<String> end = new ArrayList<String>();
-		List<String> pay = new ArrayList<String>();
+		List<String> wage = new ArrayList<String>();
 		String[] input = {""};
 		String temp;
 
@@ -26,20 +26,31 @@ public class CProject
 			toys.add(input[1]);
 			start.add(input[2]);
 			end.add(input[3]);
-			pay.add(input[4]);
+			wage.add(input[4]);
 
 		}
 		System.out.println("Elf\tGifts\t\tStart\tEnd\tPay");
 		for(int i = 0; i < 5; i++)
 		{
-			if((i+1) % 5 == 0)
-				System.out.println();
+			System.out.print(elfID.get(i) + "\t");
+			System.out.print(toys.get(i) + "\t");
+			System.out.print(start.get(i) + "\t");
+			System.out.print(end.get(i) + "\t");
+			System.out.print(wage.get(i));
+			System.out.println();
 		}
-
+		fullPay(start, end, wage);
 	}
+	public static void fullPay(List<String> start, List<String> end, List<String> wage)
+	{
 
-	public static List<Integer> convertStringToInt(List<String>){
-		return 0;
+		int hours = 0;
+		int elfPay = 0;
+		for(int i = 0; i < 5; i++)
+		{
+			hours = Integer.parseInt(end.get(i)) - Integer.parseInt(start.get(i));
+			elfPay = Integer.parseInt(wage.get(i)) * hours;
+			System.out.println("Elf pay rate: " + elfPay);
+		}
 	}
 }
-
