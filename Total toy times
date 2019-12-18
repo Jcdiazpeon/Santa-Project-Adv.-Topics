@@ -1,0 +1,11 @@
+public static void totalTime(List<String> time, List<String> orders)
+	{
+		ArrayList<Integer> totalTime = new ArrayList<Integer>();
+
+		for (int i = 0; i < 10; i++)
+		{
+			int hours = Integer.parseInt(time.get(i)) * Integer.parseInt(orders.get(i));
+
+			System.out.println(hours);
+		}
+	}
