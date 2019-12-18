@@ -1,0 +1,11 @@
+public static void elves(List<String> toys)
+	{
+		String[] test = toys.toArray(new String[toys.size()]);
+		int[] numOfElves = new int[10];
+		String[] binary = new String[40];
+		for(int i = 0; i < 40; i++)
+		{
+			binary[i] = toys.get(i);
+			System.out.println(binary[i]);
+		}
+	}
