@@ -27,7 +27,6 @@ public class CProject
 			start.add(input[2]);
 			end.add(input[3]);
 			wage.add(input[4]);
-
 		}
 		System.out.println("Elf\tGifts\t\tStart\tEnd\tPay");
 		for(int i = 0; i < 5; i++)
