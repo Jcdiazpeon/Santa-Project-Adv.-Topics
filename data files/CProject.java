@@ -28,30 +28,10 @@ public class CProject
 			end.add(Integer.parseInt(input[3]));
 			wage.add(Integer.parseInt(input[4]));
 		}
-		System.out.println("Wages");
-		for(int i = 0; i < wage.size(); i++){
-			System.out.println(wage.get(i));
-		}
-
-		/*
-		System.out.println("Elf\tGifts\t\tStart\tEnd\tPay");
-		for(int i = 0; i < 5; i++)
-		{
-			System.out.print(elfID.get(i) + "\t");
-			System.out.print(toys.get(i) + "\t");
-			System.out.print(start.get(i) + "\t");
-			System.out.print(end.get(i) + "\t");
-			System.out.print(wage.get(i));
-			System.out.println();
-		}
-		*/
 
 		List<Integer> weeklyPay = fullPay(start, end, wage);
 
-		System.out.println("\nPay");
-		for(int i = 0; i < weeklyPay.size(); i++){
-			System.out.println(weeklyPay.get(i));
-		}
+
 	}
 	public static List<Integer> fullPay(List<Integer> start, List<Integer> end, List<Integer> wage)
 	{
@@ -63,8 +43,6 @@ public class CProject
 			hours = end.get(i) - start.get(i);
 			elfPay = wage.get(i) * hours;
 			total.add(elfPay);
-
-			//System.out.println("Elf pay: " + elfPay);
 		}
 		return total;
 	}
