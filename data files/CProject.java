@@ -10,7 +10,7 @@ public class CProject
 		Scanner time = new Scanner(new FileReader("ToyConstructionTime.txt"));
 		Scanner list = new Scanner(new FileReader("ToyList.txt"));
 		Scanner orders = new Scanner(new FileReader("ToyOrders.txt"));
-		List<Integer> elfID = new ArrayList<Integer>();
+		List<String> elfID = new ArrayList<String>();
 		List<Integer> toys = new ArrayList<Integer>();
 		List<Integer> start = new ArrayList<Integer>();
 		List<Integer> end = new ArrayList<Integer>();
@@ -22,12 +22,18 @@ public class CProject
 		{
 			temp = info.nextLine();
 			input = (temp.split(" "));
-			elfID.add(Integer.parseInt(input[0]));
+			elfID.add(input[0]);
 			toys.add(Integer.parseInt(input[1]));
 			start.add(Integer.parseInt(input[2]));
 			end.add(Integer.parseInt(input[3]));
 			wage.add(Integer.parseInt(input[4]));
 		}
+		System.out.println("Wages");
+		for(int i = 0; i < wage.size(); i++){
+			System.out.println(wage.get(i));
+		}
+
+		/*
 		System.out.println("Elf\tGifts\t\tStart\tEnd\tPay");
 		for(int i = 0; i < 5; i++)
 		{
@@ -38,18 +44,28 @@ public class CProject
 			System.out.print(wage.get(i));
 			System.out.println();
 		}
-		fullPay(start, end, wage);
-	}
-	public static void fullPay(List<Integer> start, List<Integer> end, List<Integer> wage)
-	{
+		*/
 
+		List<Integer> weeklyPay = fullPay(start, end, wage);
+
+		System.out.println("\nPay");
+		for(int i = 0; i < weeklyPay.size(); i++){
+			System.out.println(weeklyPay.get(i));
+		}
+	}
+	public static List<Integer> fullPay(List<Integer> start, List<Integer> end, List<Integer> wage)
+	{
+		List<Integer> total = new ArrayList<Integer>();
 		int hours = 0;
 		int elfPay = 0;
 		for(int i = 0; i < 5; i++)
 		{
 			hours = end.get(i) - start.get(i);
 			elfPay = wage.get(i) * hours;
-			System.out.println("Elf pay: " + elfPay);
+			total.add(elfPay);
+
+			//System.out.println("Elf pay: " + elfPay);
 		}
+		return total;
 	}
 }
