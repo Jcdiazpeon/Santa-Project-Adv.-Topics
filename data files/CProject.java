@@ -87,4 +87,22 @@ public class CProject
 			System.out.println(items.get(i) + "\t" + toyTime.get(i));
 		}
 	}
+	public static void numElves(List<String> toys)
+	{
+		List<Integer> total = new ArrayList<Integer>();
+		char[] temp;
+		String tem;
+		for(int i = 0; i < 10; i++)
+			total.add(0);
+		for(int i = 0; i < 4; i++)
+		{
+			tem = (toys.get(i));
+			temp = tem.toCharArray();
+			for(int j = 0; j < 10; j++)
+			{
+				total.set(j, total.get(j) + Integer.parseInt(String.valueOf(temp[j])));
+			}
+		}
+		System.out.println(total);
+	}
 }
