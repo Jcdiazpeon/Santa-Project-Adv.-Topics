@@ -15,6 +15,7 @@ public class CProject
 		List<Integer> start = new ArrayList<Integer>(); //Time (/24)
 		List<Integer> end = new ArrayList<Integer>(); //Time (/24)
 		List<Integer> wage = new ArrayList<Integer>(); //Int
+		List<Integer> toyOrders = new ArrayList<Integer>();
 
 		List<String> items = new ArrayList<String>(); //ToyList (String)
 		List<Integer> toyTime = new ArrayList<Integer>();//ToyConstructionTime
@@ -41,6 +42,7 @@ public class CProject
 			input = temp.split(",");
 
 		}
+
 		while(list.hasNext())
 		{
 			temp = list.nextLine();
@@ -51,17 +53,65 @@ public class CProject
 			toyTime.add(Integer.parseInt(input[i]));
 		}
 
+		while(orders.hasNext())
+		{
+			temp = orders.nextLine();
+			temp = temp.replace(" ", "");
+			input = temp.split(",");
+			for(int i = 0; i < 10; i++)
+				toyOrders.add(Integer.parseInt(input[i]));
+		}
 
 		List<Integer> weeklyPay = fullPay(start, end, wage);
 		hoursWorkedOnEachToy = calcHoursWorked(start, end, toysWorkedOn, toyTime);
-		for(int i = 0; i < hoursWorkedOnEachToy.size(); i++){
-			System.out.println(hoursWorkedOnEachToy.get(i));
+
+		int timeWastedByElf = hoursWorkedOnEachToy.remove(hoursWorkedOnEachToy.size() - 1);
+		int totalHoursWasted = hoursWorkedOnEachToy.remove(hoursWorkedOnEachToy.size() - 1);
+		int worstElf = hoursWorkedOnEachToy.remove(hoursWorkedOnEachToy.size() - 1); //removes the last elements which was the worst elf
+
+		System.out.println("Worst Elf by time wasted: " + worstElf);
+		System.out.println("Total Hours Wasted by all elfs per day: " + totalHoursWasted);
+
+		numOfItemsCompleted = calcItemsMade(toyTime, hoursWorkedOnEachToy); //List of items made per day
+
+		//First Order
+		System.out.println("\nItems made on the first order: ");
+		for(int i = 0; i < numOfItemsCompleted.size(); i++){
+			System.out.print((numOfItemsCompleted.get(i) * 17) + "\t");
 		}
-		//numOfItemsCompleted = calcItemsMade(toysWorkedOn, hoursWorkedOnEachToy);
+		System.out.println("\nItems needed on the first order: ");
+		for(int i = 0; i < 10; i++){
+			System.out.print(toyOrders.get(i) + "\t");
+		}
 
-		//tTime(toyTime, items);
-		//numElves(items);
+		//Second Order
+		System.out.println("\n\nItems made on the second order: ");
+		for(int i = 0; i < numOfItemsCompleted.size(); i++){
+			System.out.print((numOfItemsCompleted.get(i) * 9) + "\t");
+		}
+		System.out.println("\nItems needed on the second order: ");
+		for(int i = 10; i < 20; i++){
+			System.out.print(toyOrders.get(i) + "\t");
+		}
 
+		//Third Order
+		System.out.println("\n\nItems made on the third order: ");
+		for(int i = 0; i < numOfItemsCompleted.size(); i++){
+			System.out.print((numOfItemsCompleted.get(i) * 10) + "\t");
+		}
+		System.out.println("\nItems needed on the third order: ");
+		for(int i = 20; i < 30; i++){
+			System.out.print(toyOrders.get(i) + "\t");
+		}
+
+		System.out.println("\n\n\nPayment to each Elf per week: ");
+		for(int i = 0; i < elfID.size(); i++)
+			System.out.print(elfID.get(i) + "\t");
+
+		System.out.println();
+
+		for(int i = 0; i < elfID.size(); i++)
+			System.out.print("$" + weeklyPay.get(i) + "\t");
 	}
 
 	//Returns how much each elf is paid per week with the hours workd
@@ -84,13 +134,11 @@ public class CProject
 		List<Integer> results = new ArrayList<Integer>();
 		List<Integer> hoursLeftPerElf = new ArrayList<Integer>();
 
-
 		//Finds the hours each elf works
 		for(int i = 0; i < start.size(); i++){
 			int hours = end.get(i) - start.get(i);
 			hoursLeftPerElf.add(hours);
 		}
-
 
 		for(int i = 0; i < start.size(); i++){
 			for(int j = 0; j < toysWorkedOn.get(i).length(); j++){
@@ -106,8 +154,58 @@ public class CProject
 				}
 			}
 		}
+		//Finds the worst elf by most time wasted
+		float maxTimeWasted = 0;
+		int indexOfWorst = 9999;
+		int totalHoursWasted = 0;
+
+		for(int i = 0; i < hoursLeftPerElf.size(); i++){  //Finds the max
+			totalHoursWasted += hoursLeftPerElf.get(i);
+			if(hoursLeftPerElf.get(i) >= maxTimeWasted){
+				maxTimeWasted = hoursLeftPerElf.get(i);
+				indexOfWorst = i;
+			}
+		}
+		results.add(indexOfWorst);
+		results.add(totalHoursWasted);
+		results.add((int)maxTimeWasted);
 		return results;
 	}
+
+	//returns the num of items made with the given hours worked on them PER DAY
+	public static List<Integer> calcItemsMade(List<Integer> toyTime, List<Integer> hoursWorkedOnEachToy){
+		List<Integer> results = new ArrayList<Integer>();
+
+		for(int i = 0; i< hoursWorkedOnEachToy.size(); i++){
+			results.add(hoursWorkedOnEachToy.get(i) / toyTime.get(i));  //Toys completed with the given time
+		}
+
+		return results;
+	}
+
+	public static List<Float> leftOverTime(List<Integer> toyTime, List<Integer> hoursWorkedOnEachToy){
+			List<Float> results = new ArrayList<Float>();
+
+			for(int i = 0; i< hoursWorkedOnEachToy.size(); i++){
+				results.add((float)(hoursWorkedOnEachToy.get(i) % toyTime.get(i)));  //Toys completed with the given time
+			}
+			return results;
+	}
+
+	public static int mostUselessElf(List<Float> leftOvers){
+		float maxTimeWasted = 0;
+		int indexOfWorst = 9999;
+
+		for(int i = 0; i < leftOvers.size(); i++){  //Finds the max
+			if(leftOvers.get(i) >= maxTimeWasted){
+				maxTimeWasted = leftOvers.get(i);
+				indexOfWorst = i;
+			}
+		}
+		return indexOfWorst;
+	}
+
+
 
 	public static void tTime(List<Integer> toyTime, List<String> items)  //Just prints the time to the screen of each item
 	{
