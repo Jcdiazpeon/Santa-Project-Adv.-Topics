@@ -239,3 +239,33 @@ public class CProject
 		System.out.println(total);
 	}
 }
+
+/*
+Gifts in order:
+Candylocks      Crayola Chemistry Set   Baby Shark Puppet       Glam Nails      Crayola Scrubbie Pet
+Giant Mystery Egg       Barbie Dream Plane      Poppin Pals     Treasure Tomb   Linkimals
+
+Items made on the first order:
+68      17      68      68      51      85      51      17      34      17
+Items needed on the first order:
+10      5       16      13      21      44      18      34      29      40
+
+Items made on the second order:
+36      9       36      36      27      45      27      9       18      9
+Items needed on the second order:
+15      16      34      5       30      12      18      13      46      25
+
+Items made on the third order:
+40      10      40      40      30      50      30      10      20      10
+Items needed on the third order:
+20      46      39      19      10      32      18      34      46      10
+
+
+Payment to each Elf per week:
+0011    1001    0111    1000    0101
+$300    $380    $375    $340    $735
+
+Worst Elf by time wasted: 4
+Total Hours Wasted by all elfs per day: 24
+Press any key to continue . . .
+*/
