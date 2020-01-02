@@ -119,7 +119,7 @@ public class CProject
 			System.out.print("$" + weeklyPay.get(i) + "\t");
 
 		System.out.println("\n\nWorst Elf by time wasted: " + worstElf);
-		System.out.println("Total Hours Wasted by all elfs per day: " + totalHoursWasted);
+		System.out.println("Total Hours Wasted by all elves per day: " + totalHoursWasted);
 	}
 
 	//Returns how much each elf is paid per week with the hours workd
@@ -266,6 +266,6 @@ Payment to each Elf per week:
 $300    $380    $375    $340    $735
 
 Worst Elf by time wasted: 4
-Total Hours Wasted by all elfs per day: 24
+Total Hours Wasted by all elves per day: 24
 Press any key to continue . . .
 */
