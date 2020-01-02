@@ -69,13 +69,18 @@ public class CProject
 		int totalHoursWasted = hoursWorkedOnEachToy.remove(hoursWorkedOnEachToy.size() - 1);
 		int worstElf = hoursWorkedOnEachToy.remove(hoursWorkedOnEachToy.size() - 1); //removes the last elements which was the worst elf
 
-		System.out.println("Worst Elf by time wasted: " + worstElf);
-		System.out.println("Total Hours Wasted by all elfs per day: " + totalHoursWasted);
-
 		numOfItemsCompleted = calcItemsMade(toyTime, hoursWorkedOnEachToy); //List of items made per day
 
+		System.out.println("Gifts in order: ");
+		for(int i = 0; i < items.size(); i++){
+			System.out.print(items.get(i) + "\t");
+			if(i == items.size()/2 -1)
+				System.out.println();
+		}
+
+
 		//First Order
-		System.out.println("\nItems made on the first order: ");
+		System.out.println("\n\nItems made on the first order: ");
 		for(int i = 0; i < numOfItemsCompleted.size(); i++){
 			System.out.print((numOfItemsCompleted.get(i) * 17) + "\t");
 		}
@@ -112,6 +117,9 @@ public class CProject
 
 		for(int i = 0; i < elfID.size(); i++)
 			System.out.print("$" + weeklyPay.get(i) + "\t");
+
+		System.out.println("\n\nWorst Elf by time wasted: " + worstElf);
+		System.out.println("Total Hours Wasted by all elfs per day: " + totalHoursWasted);
 	}
 
 	//Returns how much each elf is paid per week with the hours workd
