@@ -84,25 +84,24 @@ public class CProject
 		List<Integer> results = new ArrayList<Integer>();
 		List<Integer> hoursLeftPerElf = new ArrayList<Integer>();
 
+
 		//Finds the hours each elf works
 		for(int i = 0; i < start.size(); i++){
 			int hours = end.get(i) - start.get(i);
-			hoursLeftPerElf.set(i, hours);
+			hoursLeftPerElf.add(hours);
 		}
 
 
 		for(int i = 0; i < start.size(); i++){
 			for(int j = 0; j < toysWorkedOn.get(i).length(); j++){
-
 				if(toysWorkedOn.get(i).charAt(j) == '1'){ //Elf works on this item
-
-					if(hoursLeftPerElf.get(j) >= toyTime.get(i)){ //Has enough time to make it
-						if(results.get(j) != null) //Already had time spent on it
+					if(hoursLeftPerElf.get(i) >= toyTime.get(j)){ //Has enough time to make it
+						if(j < results.size()) //Already had time spent on it
 							results.set(j, results.get(j) + toyTime.get(j));
 						else
-							results.set(j, toyTime.get(j)); //First time working on item
+							results.add(toyTime.get(j)); //First time working on item
 
-						hoursLeftPerElf.set(j, hoursLeftPerElf.get(j) - toyTime.get(j));
+						hoursLeftPerElf.set(i, hoursLeftPerElf.get(i) - toyTime.get(j));
 					}
 				}
 			}
